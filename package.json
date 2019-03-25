@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/emmabixler/liri-node-app1/issues"
   },
-  "homepage": "https://github.com/emmabixler/liri-node-app1#readme"
+  "homepage": "https://github.com/emmabixler/liri-node-app1#readme",
+  "dependencies": {
+    "node-spotify-api": "^1.0.7"
+  }
 }
