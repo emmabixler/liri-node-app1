@@ -53,22 +53,6 @@ function concertThis(userRequest) {
   });
 }
 
-for (var i = 3; i < inputRequest.length; i++) {
-  if (i > 3 && i < inputRequest.length) {
-    selection = selection + "+" + nodeArgs[i];
-  } else {
-    selection += nodeArgs[i];
-  }
-}
-console.log(selection);
-console.log(command);
-
-if (command == "movie-this") {
-  movie();
-} else if (command == "spotify-this-song") {
-  song();
-}
-
 //movie request
 function movie() {
   var queryURL =
