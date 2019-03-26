@@ -6,7 +6,7 @@ exports.spotify = {
 };
 
 var keys = require("./keys.js");
-var spotify = new Spotify(keys.spotify);
+// var spotify = new Spotify(keys.spotify);
 
 // /spotify id
 // 48cec1099fd8422fb0c245a0de4aa557

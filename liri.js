@@ -5,21 +5,22 @@ require("dotenv").config();
 // do-what-it-says
 
 //dontenv is to hide the keys
-require("dotenv").config();
 
 //list of varibales
 var keys = require("./keys.js");
 var fs = require("fs");
-// var Spotify = require("node-spotify-api");
-// var spotify = new Spotify(keys.spotify);
+var spotify = new Spotify(keys.spotify);
+var Spotify = require("node-spotify-api");
 var axios = require("axios");
 var moment = require("moment");
 var request = require("request");
-var inputRequest = process.argv[2];
-var liriReturn = process.argv.slice(3).join("");
+
 var bandsInTown = keys.bandsInTowmn;
 var nameSong = keys.nameSong;
 
+var inputRequest = process.argv[2];
+var liriReturn = process.argv.slice(3).join("");
+var selection = "";
 //app logic
 switch (inputRequest) {
   case "concertThis":
@@ -54,9 +55,24 @@ function concertThis(userRequest) {
 }
 
 //movie request
+
+for (var i = 3; i < inputRequest.length; i++) {
+  if (i > 3 && i < inputRequest.length) {
+    selection = selection + "+" + inputRequest[i];
+  } else {
+    selection += inputRequest[i];
+  }
+}
+console.log(selection);
+console.log(liriReturn);
+if (liriReturn == "movieThis") {
+  movie();
+} else if (liriReturn == "spotify-this-song") {
+  song();
+}
+
 function movie() {
-  var queryURL =
-    "http:www.omdbapi.com/?t=" + selection + "&y=&plot=short&apikey=trilogy";
+  "http:www.omdbapi.com/?t=" + selection + "&y=&plot=short&apikey=trilogy";
   axios.get(queryUrl).then(function(response) {
     console.log(response);
     console.log("Title: " + response.data.Title);
