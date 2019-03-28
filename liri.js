@@ -9,15 +9,15 @@ require("dotenv").config();
 //list of varibales
 var keys = require("./keys.js");
 var fs = require("fs");
-var spotify = new Spotify(keys.spotify);
 var Spotify = require("node-spotify-api");
+var spotify = new Spotify(keys.spotify);
 var axios = require("axios");
 var moment = require("moment");
 var request = require("request");
 
 var bandsInTown = keys.bandsInTowmn;
 var nameSong = keys.nameSong;
-
+console.log("my log", process.argv);
 var inputRequest = process.argv[2];
 var liriReturn = process.argv.slice(3).join("");
 var selection = "";
@@ -47,7 +47,7 @@ function concertThis(userRequest) {
     "/events?app_id=codingbootcamp" +
     keys.bandsInTown;
   axios.get(url).then(function(response) {
-    // console.log(response.data)
+    console.log(response.data);
     for (var i = 0; i < response.data.length; i++) {
       console.log();
     }
