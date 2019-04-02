@@ -66,15 +66,20 @@ for (var i = 3; i < inputRequest.length; i++) {
 console.log(selection);
 console.log(liriReturn);
 if (liriReturn == "movieThis") {
-  movie();
+  movieThis();
 } else if (liriReturn == "spotify-this-song") {
   song();
 }
 
-function movie() {
-  "http:www.omdbapi.com/?t=" + selection + "&y=&plot=short&apikey=trilogy";
-  axios.get(queryUrl).then(function(response) {
+function movieThis(movieRequest) {
+  var selection = movieRequest;
+  var url =
+    "http:www.omdbapi.com/?t=" + selection + "&y=&plot=short&apikey=trilogy";
+  axios.get(url).then(function(response) {
     console.log(response);
+    // for (var i = 0; i < response.data.length; i++) {
+    //   console.log();
+    // }
     console.log("Title: " + response.data.Title);
     console.log("Release Year: " + response.data.Year);
     console.log("IMBD ratings: " + response.data.imdbRating);
