@@ -21,6 +21,7 @@ console.log("my log", process.argv);
 var inputRequest = process.argv[2];
 var liriReturn = process.argv.slice(3).join("");
 var selection = "";
+
 //app logic
 switch (inputRequest) {
   case "concertThis":
@@ -32,8 +33,8 @@ switch (inputRequest) {
   case "movieThis":
     movieThis(liriReturn);
     break;
-  case "doThis":
-    doThis(liriReturn);
+  case "doWhatItSays":
+    doWhatItSays(liriReturn);
     break;
   default:
     console.log("hii");
@@ -54,22 +55,33 @@ function concertThis(userRequest) {
   });
 }
 //spotify
-function spotifyThisSong(songRequest) {
-  var songs = songRequest;
-  var url =
-    "https://rest.bandsintown.com/artists/" +
-    songs +
-    "/events?app_id=codingbootcamp" +
-    keys.bandsInTown;
-  axios.get(url).then(function(response) {
-    console.log(response.data);
-    for (var i = 0; i < response.data.length; i++) {
-      console.log();
+function spotifyThisSong(songName) {
+  if (songName === "") {
+    songName = "Headlines";
+  }
+  spotify.search(
+    {
+      type: "track",
+      query: songName
+    },
+    function(err, data) {
+      if (err) {
+        // console.log("error occured:" + err);
+        // return;
+        var songName = data.tracks.items[0];
+        for (var i = 0; i < songName.length; i++) {
+          console.log(i);
+          console.log("Artist:" + songName[i].Artist[0].name);
+          console.log("Name of Song:" + songName[i].NameOfSong);
+          console.log("Link of Song: " + songName[i].LinkOfSong);
+          console.log("Album: " + songName[i].Album);
+        }
+      }
     }
-  });
+  );
 }
 
-//movie request
+// movie request
 
 for (var i = 3; i < inputRequest.length; i++) {
   if (i > 3 && i < inputRequest.length) {
@@ -82,8 +94,8 @@ console.log(selection);
 console.log(liriReturn);
 if (liriReturn == "movieThis") {
   movieThis();
-} else if (liriReturn == "spotify-this-song") {
-  song();
+} else if (liriReturn == "spotifyThisSong") {
+  spotifyThisSong();
 }
 
 function movieThis(movieRequest) {
@@ -106,3 +118,9 @@ function movieThis(movieRequest) {
 }
 
 //do what it says
+function doWhatItSays() {
+  fs.readFile("random.txt", "utf8", function(err, data) {
+    console.log(data);
+    var dataArr = data.split(",");
+  });
+}
