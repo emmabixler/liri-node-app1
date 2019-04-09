@@ -26,13 +26,13 @@ switch (inputRequest) {
   case "concertThis":
     concertThis(liriReturn);
     break;
-  case "spotify-this":
+  case "spotifyThisSong":
     spotifyThisSong(liriReturn);
     break;
   case "movieThis":
-    movieThis();
+    movieThis(liriReturn);
     break;
-  case "do-this":
+  case "doThis":
     doThis(liriReturn);
     break;
   default:
@@ -44,6 +44,21 @@ function concertThis(userRequest) {
   var url =
     "https://rest.bandsintown.com/artists/" +
     artist +
+    "/events?app_id=codingbootcamp" +
+    keys.nameSong;
+  axios.get(url).then(function(response) {
+    console.log(response.data);
+    for (var i = 0; i < response.data.length; i++) {
+      console.log();
+    }
+  });
+}
+//spotify
+function spotifyThisSong(songRequest) {
+  var songs = songRequest;
+  var url =
+    "https://rest.bandsintown.com/artists/" +
+    songs +
     "/events?app_id=codingbootcamp" +
     keys.bandsInTown;
   axios.get(url).then(function(response) {
@@ -74,20 +89,19 @@ if (liriReturn == "movieThis") {
 function movieThis(movieRequest) {
   var selection = movieRequest;
   var url =
-    "http:www.omdbapi.com/?t=" + selection + "&y=&plot=short&apikey=trilogy";
+    "http://www.omdbapi.com/?t=" + selection + "&y=&plot=short&apikey=trilogy";
   axios.get(url).then(function(response) {
-    console.log(response);
-    // for (var i = 0; i < response.data.length; i++) {
-    //   console.log();
-    // }
-    console.log("Title: " + response.data.Title);
-    console.log("Release Year: " + response.data.Year);
-    console.log("IMBD ratings: " + response.data.imdbRating);
-    console.log("Country: " + response.data.Country);
-    console.log("Language: " + response.data.Language);
-    console.log("Plot: " + response.data.Plot);
-    console.log("Actors: " + response.data.Actors);
-    console.log("Rotten Tomatoes:" + response.data.Ratings[1].Value);
+    console.log(response.data);
+    for (var i = 0; i < response.data.length; i++) {
+      console.log("Title: " + response.data.Title);
+      console.log("Release Year: " + response.data.Year);
+      console.log("IMBD ratings: " + response.data.imdbRating);
+      console.log("Country: " + response.data.Country);
+      console.log("Language: " + response.data.Language);
+      console.log("Plot: " + response.data.Plot);
+      console.log("Actors: " + response.data.Actors);
+      console.log("Rotten Tomatoes:" + response.data.Ratings[1].Value);
+    }
   });
 }
 
